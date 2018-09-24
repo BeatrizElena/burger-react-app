@@ -49,6 +49,7 @@ class BurgerBuilder extends Component {
         };
         updatedIngredients[type] = updatedCount;
         const priceAddition = INGREDIENT_PRICES[type];
+        // oldPrice is defined in state object at beginning of this file
         const oldPrice = this.state.totalPrice;
         const newPrice = oldPrice + priceAddition;
         this.setState({totalPrice: newPrice, ingredients: updatedIngredients})
@@ -69,6 +70,7 @@ class BurgerBuilder extends Component {
         const priceDeduction = INGREDIENT_PRICES[type];
         const oldPrice = this.state.totalPrice;
         const newPrice = oldPrice - priceDeduction;
+        // setState to be returned below
         this.setState({totalPrice: newPrice, ingredients: updatedIngredients})
     }
 
@@ -90,7 +92,11 @@ class BurgerBuilder extends Component {
                 <BuildControls
                     ingredientAdded={this.addIngredientHandler}
                     ingredientRemoved={this.removeIngredientHandler}
-                    disabled={disabledInfo} />
+                    disabled={disabledInfo}
+                    // price starts at $4 (we def'd in state object)
+                    // and goes up or down according to the ingredients we 
+                    // add or remove
+                    price={this.state.totalPrice} />
             </Aux>
         )
     }

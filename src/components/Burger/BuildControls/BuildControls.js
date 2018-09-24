@@ -12,6 +12,11 @@ const controls = [
 
 const buildControls = (props) => (
     <div className={classes.BuildControls}>
+        {/* Price starts at $4 (we def'd in state object in BurgerBuilder)
+            and goes up or down according to the ingredients we 
+            add or remove 
+            Then, we add toFixed() method to fix decimal places to 2*/}
+        <p>Current Price: <strong>{props.price.toFixed(2)}</strong></p>
         {controls.map(ctrl => (
             <BuildControl 
             key={ctrl.label} 
