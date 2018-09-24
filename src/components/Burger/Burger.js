@@ -9,7 +9,7 @@ const burger = (props) => {
     // with each ingredient (igKey) returned by the map function
     // the transformed ingredients const will then go in the return statement of
     // the const burger
-    const transformedIngredients = Object.keys(props.ingredients)
+    let transformedIngredients = Object.keys(props.ingredients)
         .map(igKey => {
             // for each ingredient returned by map(), use the Array() method to 
             // transform it into a new array of length given
@@ -24,7 +24,17 @@ const burger = (props) => {
             return [...Array(props.ingredients[igKey])].map((_, i) => {
                 return <BurgerIngredient key={igKey + i} type={igKey} />
             });
-        });
+        })
+        .reduce((arr, el) => {
+            return arr.concat(el)
+        }, []);
+        // the reduce method above flattens the separate arrays map() gaves us into just
+        // one array by using the concat() method and adding each new array (el) to the 
+        // prior array
+        if (transformedIngredients.length === 0) {
+            transformedIngredients = <p>Please start adding ingredients!</p>
+        }
+
     return (
         <div className={classes.Burger}>
          <BurgerIngredient type="bread-top" />
